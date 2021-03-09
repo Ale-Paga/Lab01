@@ -3,6 +3,7 @@ package it.polito.tdp.parole;
 import it.polito.tdp.parole.model.Parole;
 
 import java.net.URL;
+import java.util.*;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -12,7 +13,12 @@ import javafx.scene.control.TextField;
 
 public class FXMLController {
 	
-	Parole elenco ;
+	private Parole elenco ;
+	private List<String> elP = new ArrayList<>();
+	private String parola ="";
+	private String parolaX ="";
+	private long startTime=0;
+	private long estimatedTime=0;
 
     @FXML
     private ResourceBundle resources;
@@ -28,19 +34,65 @@ public class FXMLController {
 
     @FXML
     private TextArea txtResult;
+    
+    @FXML
+    private TextArea txtTempo;
+
+    @FXML
+    private Button btnCancella;
 
     @FXML
     private Button btnReset;
 
+    
+    
+    
+    
     @FXML
     void doInsert(ActionEvent event) {
-    	// TODO
+    	this.startTime=System.nanoTime();
+    	elenco.addParola(txtParola.getText());
+    	this.txtParola.clear();
+    	elP =elenco.getElenco();
+    	for(String i: elP) {
+    		this.parola = parola +i+"\n";
+    	}
+    	this.txtResult.setText(parola);
+    	parola="";
+    	estimatedTime = System.nanoTime() - startTime;
+    	this.txtTempo.setText("Tempo operazione in nanosecondi: "+this.estimatedTime+" ns");
     }
 
+    
+    
+    
     @FXML
     void doReset(ActionEvent event) {
-    	// TODO
+    	this.startTime=System.nanoTime();
+    	this.elenco.reset();
+    	this.txtResult.clear();
+    	long estimatedTime = System.nanoTime() - startTime;
+    	this.txtTempo.setText("Tempo operazione in nanosecondi: "+this.estimatedTime+" ns");
     }
+    
+    
+    
+    @FXML
+    void doCancella(ActionEvent event) {
+    	this.startTime=System.nanoTime();
+    	this.elP=elenco.eliminaParola(this.txtResult.getSelectedText());
+    	for(String i: elP) {
+    		this.parolaX = parolaX +i+"\n";
+    	}
+    	this.txtResult.setText(parolaX);
+    	parolaX="";
+    	long estimatedTime = System.nanoTime() - startTime;
+    	this.txtTempo.setText("Tempo operazione in nanosecondi: "+this.estimatedTime+" ns");
+
+    }
+    
+    
+    
 
     @FXML
     void initialize() {
