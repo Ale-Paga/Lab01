@@ -71,7 +71,7 @@ public class FXMLController {
     	this.startTime=System.nanoTime();
     	this.elenco.reset();
     	this.txtResult.clear();
-    	long estimatedTime = System.nanoTime() - startTime;
+    	 estimatedTime = System.nanoTime() - startTime;
     	this.txtTempo.setText("Tempo operazione in nanosecondi: "+this.estimatedTime+" ns");
     }
     
@@ -86,7 +86,7 @@ public class FXMLController {
     	}
     	this.txtResult.setText(parolaX);
     	parolaX="";
-    	long estimatedTime = System.nanoTime() - startTime;
+    	 estimatedTime = System.nanoTime() - startTime;
     	this.txtTempo.setText("Tempo operazione in nanosecondi: "+this.estimatedTime+" ns");
 
     }
