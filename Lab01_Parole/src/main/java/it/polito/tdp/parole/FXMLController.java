@@ -52,6 +52,7 @@ public class FXMLController {
     void doInsert(ActionEvent event) {
     	this.startTime=System.nanoTime();
     	elenco.addParola(txtParola.getText());
+    	estimatedTime = System.nanoTime() - startTime;
     	this.txtParola.clear();
     	elP =elenco.getElenco();
     	for(String i: elP) {
@@ -59,7 +60,6 @@ public class FXMLController {
     	}
     	this.txtResult.setText(parola);
     	parola="";
-    	estimatedTime = System.nanoTime() - startTime;
     	this.txtTempo.setText("Tempo operazione in nanosecondi: "+this.estimatedTime+" ns");
     }
 
@@ -70,8 +70,8 @@ public class FXMLController {
     void doReset(ActionEvent event) {
     	this.startTime=System.nanoTime();
     	this.elenco.reset();
+    	estimatedTime = System.nanoTime() - startTime;
     	this.txtResult.clear();
-    	 estimatedTime = System.nanoTime() - startTime;
     	this.txtTempo.setText("Tempo operazione in nanosecondi: "+this.estimatedTime+" ns");
     }
     
@@ -81,12 +81,12 @@ public class FXMLController {
     void doCancella(ActionEvent event) {
     	this.startTime=System.nanoTime();
     	this.elP=elenco.eliminaParola(this.txtResult.getSelectedText());
+    	estimatedTime = System.nanoTime() - startTime;
     	for(String i: elP) {
     		this.parolaX = parolaX +i+"\n";
     	}
     	this.txtResult.setText(parolaX);
     	parolaX="";
-    	 estimatedTime = System.nanoTime() - startTime;
     	this.txtTempo.setText("Tempo operazione in nanosecondi: "+this.estimatedTime+" ns");
 
     }
